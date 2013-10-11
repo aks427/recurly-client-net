@@ -25,6 +25,7 @@ namespace Recurly
         public string HostedLoginToken { get; private set; }
 
         internal const string UrlPrefix = "/accounts/";
+        internal const string UrlPrefixV2 = "/v2/accounts/";
 
         public RecurlyAccount(string accountCode)
         {
