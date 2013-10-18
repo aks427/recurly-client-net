@@ -46,7 +46,7 @@ namespace Recurly
             RecurlyClient.PerformRequest(RecurlyClient.HttpRequestMethod.Post,
                 ChargesUrl(accountCode),
                 new RecurlyClient.WriteXmlDelegate(adjustment.WriteXml),
-                null);
+                new RecurlyClient.ReadXmlDelegate(adjustment.ReadXml));
 
             return adjustment;
         }
@@ -72,7 +72,7 @@ namespace Recurly
                     DateTime date;
                     switch (reader.Name)
                     {
-                        case "id":
+                        case "uuid":
                             this.Id = reader.ReadElementContentAsString();
                             break;
 
@@ -86,7 +86,7 @@ namespace Recurly
                                 this.EndDate = date;
                             break;
 
-                        case "amount_in_cents":
+                        case "unit_amount_in_cents":
                             int amount;
                             if (Int32.TryParse(reader.ReadElementContentAsString(), out amount))
                                 this.AmountInCents = amount;
